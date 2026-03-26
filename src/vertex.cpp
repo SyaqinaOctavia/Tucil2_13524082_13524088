@@ -1,5 +1,6 @@
 #include "vertex.hpp"
 
+Vertex::Vertex() : x(0), y(0), z(0);
 Vertex::Vertex(double a, double b, double c) : x(a), y(b), z(c){}
 
 Vertex operator+(const Vertex& v1, const Vertex& v2){

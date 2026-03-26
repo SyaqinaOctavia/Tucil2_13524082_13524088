@@ -6,6 +6,7 @@ class Vertex {
         double x;
         double y;
         double z;
+        Vertex();
         Vertex(double a, double b, double c);
         Vertex mid(const Vertex v);
         double dot(const Vertex v);
