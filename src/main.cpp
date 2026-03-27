@@ -16,27 +16,27 @@ void buildOctree(OctreeNode* node, int depth, int maxDepth, vector<Triangle> &tr
     
     // cek apakah cube ini kena triangle
     bool intersect = false;
-    for (auto& tri : triangles) {
-        if (Intersects(tri, node->box)) {
+    for(auto& tri : triangles){
+        if(Intersects(tri, node->box)){
             intersect = true;
             break;
         }
     }
     
-    if (!intersect) {
+    if(!intersect){ // jika tidak berpotongan, maka tidak perlu lanjut telusuri
         c[depth-1].notChecked++;
         return; // kosong, stop
     }
     
-    if (depth == maxDepth) {
-        node->isFilled = true;
+    if(depth == maxDepth){ // Cek apakah sudah voxel terkecil
+        node->isFilled = true; // kalau sudah masukkan voxel ke list
         voxel.push_back(node->box);
         return;
     }
     
-    node->subdivide();
+    node->subdivide(); // Kalau berpotongan, tapi belum voxel terkecil -> bagi 8
     
-    for (int i = 0; i < 8; i++) {
+    for(int i = 0; i < 8; i++){
         c[depth].nodeBuild++;
         buildOctree(node->children[i], depth + 1, maxDepth, triangles, voxel, c);
     }
